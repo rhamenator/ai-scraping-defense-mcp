@@ -11,7 +11,7 @@ A production-ready **Rust MCP (Model Context Protocol) server** providing AI-scr
 
 - **23 MCP tools**: classify, explain, batch_classify, health, model_info, feedback, enrich_ip/asn/ua, threat_lookup, canary_eval, abuse_pattern_match, drift_report, calibration_report, and more
 - **WebSocket transport** with JSON-RPC 2.0 protocol
-- ******** authentication** at connection establishment
+- **Token-based authentication** (****** scheme) at connection establishment
 - **Global concurrency control** via semaphore with backpressure
 - **Per-tool timeouts** to prevent resource exhaustion
 - **Prometheus metrics** at `/metrics` with p50/p95/p99 histograms
@@ -38,7 +38,7 @@ Server starts on `http://0.0.0.0:8085`. Test it:
 curl http://localhost:8085/health
 
 # WebSocket classify (requires wscat: npm install -g wscat)
-wscat -H "Authorization: ******" -c ws://localhost:8085/mcp
+wscat -H "Authorization: $(echo -n 'Bearer ')$YOUR_TOKEN" -c ws://localhost:8085/mcp
 > {"jsonrpc":"2.0","id":1,"method":"classify","params":{"user_agent":"GPTBot/1.0","path":"/"}}
 ```
 

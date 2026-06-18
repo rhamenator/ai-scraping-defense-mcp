@@ -31,7 +31,7 @@
 ## Request Lifecycle
 
 1. Client opens a WebSocket connection to `ws://<host>:8085/mcp`.
-2. Server authenticates the connection using the `Authorization: ****** header.
+2. Server authenticates the connection using the `Authorization` header (token scheme).
 3. Client sends a JSON-RPC 2.0 message: `{ "jsonrpc": "2.0", "id": 1, "method": "classify", "params": {...} }`.
 4. Server acquires a semaphore permit (global concurrency control).
 5. Tool is dispatched through the registry with a per-tool timeout.
@@ -46,7 +46,7 @@
 | `main.rs` | `src/main.rs` | Entry point, startup |
 | `config` | `src/config.rs` | Configuration loading (env + file) |
 | `state` | `src/state.rs` | Shared application state, metrics |
-| `auth` | `src/auth.rs` | ****** validation |
+| `auth` | `src/auth.rs` | Token validation |
 | `limits` | `src/limits.rs` | Request/batch size enforcement |
 | `telemetry` | `src/telemetry.rs` | Tracing + Prometheus metrics |
 | `mcp/server` | `src/mcp/server.rs` | Axum router, startup |

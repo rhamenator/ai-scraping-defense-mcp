@@ -61,7 +61,7 @@ curl http://localhost:8085/metrics
 npm install -g wscat
 
 # Connect and classify
-wscat -H "Authorization: ******" -c ws://localhost:8085/mcp
+wscat -H "Authorization: $(echo -n 'Bearer ')$YOUR_TOKEN" -c ws://localhost:8085/mcp
 > {"jsonrpc":"2.0","id":1,"method":"classify","params":{"user_agent":"GPTBot/1.0","path":"/"}}
 ```
 

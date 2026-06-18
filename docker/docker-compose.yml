@@ -16,7 +16,7 @@ services:
       - LOG_LEVEL=info
       - AUTH_TOKENS=replace_me_with_a_strong_token
       - MCP__REDIS__URL=redis://redis:6379
-      - MCP__POSTGRES__URL=******postgres:5432/mcp
+      - MCP__POSTGRES__URL=postgresql://mcp:${POSTGRES_PASSWORD:-mcp}@postgres:5432/mcp
     depends_on:
       redis:
         condition: service_healthy

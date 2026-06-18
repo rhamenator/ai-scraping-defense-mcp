@@ -18,6 +18,8 @@ jobs:
             target: x86_64-unknown-linux-gnu
             suffix: ""
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
