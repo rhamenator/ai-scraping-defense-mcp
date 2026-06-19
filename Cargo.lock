@@ -26,59 +26,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ai-scraping-defense-mcp"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "axum 0.7.9",
- "axum-prometheus",
- "axum-test",
- "base64 0.22.1",
- "chrono",
- "config",
- "dashmap",
- "deadpool-redis",
- "dotenvy",
- "hex",
- "hmac",
- "indexmap 2.14.0",
- "ipnetwork 0.20.0",
- "jsonschema",
- "maxminddb",
- "moka",
- "once_cell",
- "opentelemetry",
- "opentelemetry-otlp",
- "opentelemetry_sdk",
- "pretty_assertions",
- "prometheus",
- "rand 0.8.6",
- "redis",
- "regex",
- "reqwest 0.12.28",
- "serde",
- "serde_json",
- "sha2",
- "sqlx",
- "sysinfo",
- "tempfile",
- "thiserror 1.0.69",
- "time",
- "tokio",
- "tokio-stream",
- "tokio-test",
- "tower 0.4.13",
- "tower-http 0.5.2",
- "tracing",
- "tracing-opentelemetry",
- "tracing-subscriber",
- "uuid",
- "validator",
- "woothee",
-]
-
-[[package]]
 name = "allocator-api2"
 version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2765,6 +2712,59 @@ name = "regex-syntax"
 version = "0.8.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
+
+[[package]]
+name = "request-guard-mcp"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "axum 0.7.9",
+ "axum-prometheus",
+ "axum-test",
+ "base64 0.22.1",
+ "chrono",
+ "config",
+ "dashmap",
+ "deadpool-redis",
+ "dotenvy",
+ "hex",
+ "hmac",
+ "indexmap 2.14.0",
+ "ipnetwork 0.20.0",
+ "jsonschema",
+ "maxminddb",
+ "moka",
+ "once_cell",
+ "opentelemetry",
+ "opentelemetry-otlp",
+ "opentelemetry_sdk",
+ "pretty_assertions",
+ "prometheus",
+ "rand 0.8.6",
+ "redis",
+ "regex",
+ "reqwest 0.12.28",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sqlx",
+ "sysinfo",
+ "tempfile",
+ "thiserror 1.0.69",
+ "time",
+ "tokio",
+ "tokio-stream",
+ "tokio-test",
+ "tower 0.4.13",
+ "tower-http 0.5.2",
+ "tracing",
+ "tracing-opentelemetry",
+ "tracing-subscriber",
+ "uuid",
+ "validator",
+ "woothee",
+]
 
 [[package]]
 name = "reqwest"

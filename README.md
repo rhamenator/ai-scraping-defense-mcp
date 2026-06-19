@@ -1,17 +1,15 @@
-# ai-scraping-defense-mcp
+# request-guard-mcp
 
-[![CI](https://github.com/rhamenator/ai-scraping-defense-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/rhamenator/ai-scraping-defense-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/rhamenator/request-guard-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/rhamenator/request-guard-mcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A production-ready **Rust MCP (Model Context Protocol) server** providing AI-scraping defense capabilities to:
-- [`rhamenator/ai-scraping-defense`](https://github.com/rhamenator/ai-scraping-defense) (Python/Django)
-- [`rhamenator/ai-scraping-defense-iis`](https://github.com/rhamenator/ai-scraping-defense-iis) (.NET/IIS)
+A production-ready **Rust MCP (Model Context Protocol) server** for request risk classification, enrichment, and abuse-signal analysis. It can be used by any MCP-capable client over WebSocket JSON-RPC; the `ai-scraping-defense` projects are supported clients, not required dependencies.
 
 ## Features
 
 - **23 MCP tools**: classify, explain, batch_classify, health, model_info, feedback, enrich_ip/asn/ua, threat_lookup, canary_eval, abuse_pattern_match, drift_report, calibration_report, and more
 - **WebSocket transport** with JSON-RPC 2.0 protocol
-- **Token-based authentication** (****** scheme) at connection establishment
+- **Token-based authentication** (Bearer scheme) at connection establishment
 - **Global concurrency control** via semaphore with backpressure
 - **Per-tool timeouts** to prevent resource exhaustion
 - **Prometheus metrics** at `/metrics` with p50/p95/p99 histograms
@@ -24,10 +22,10 @@ A production-ready **Rust MCP (Model Context Protocol) server** providing AI-scr
 
 ```bash
 # Clone and run
-git clone https://github.com/rhamenator/ai-scraping-defense-mcp
-cd ai-scraping-defense-mcp
+git clone https://github.com/rhamenator/request-guard-mcp
+cd request-guard-mcp
 cp .env.example .env
-# Edit .env: set AUTH_TOKENS=your_strong_token
+# Set AUTH_TOKENS=your_strong_token
 cargo run --release
 ```
 
@@ -44,15 +42,17 @@ wscat -H "Authorization: $(echo -n 'Bearer ')$YOUR_TOKEN" -c ws://localhost:8085
 
 ## Client Configuration
 
-Add these variables to your client services:
+Use these variables from any MCP-capable client that supports `MODEL_URI`-style provider routing:
 
 ```dotenv
 MODEL_URI=mcp://primary/classify
 MCP_SERVER_PRIMARY_TRANSPORT=ws
-MCP_SERVER_PRIMARY_URL=ws://ai-scraping-defense-mcp:8085/mcp
+MCP_SERVER_PRIMARY_URL=ws://request-guard-mcp:8085/mcp
 MCP_SERVER_PRIMARY_AUTH_TOKEN=replace_me
 MCP_SERVER_PRIMARY_TIMEOUT=10
 ```
+
+For clients already configured with the previous `ai-scraping-defense-mcp` hostname, Docker Compose and Kubernetes manifests include an optional legacy DNS alias/service that points to the same server.
 
 See [docs/compatibility-matrix.md](docs/compatibility-matrix.md) for full details.
 
@@ -71,7 +71,7 @@ make docker-compose-up
 
 ```bash
 kubectl create secret generic mcp-secrets \
-  --namespace ai-defense \
+  --namespace request-guard \
   --from-literal=auth_tokens=your_strong_token
 
 make k8s-apply

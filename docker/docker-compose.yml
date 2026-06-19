@@ -1,12 +1,14 @@
-version: "3.9"
-
 services:
   mcp:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: ai-scraping-defense-mcp:local
-    container_name: ai-scraping-defense-mcp
+    image: request-guard-mcp:local
+    container_name: request-guard-mcp
+    networks:
+      default:
+        aliases:
+          - ai-scraping-defense-mcp
     restart: unless-stopped
     ports:
       - "8085:8085"

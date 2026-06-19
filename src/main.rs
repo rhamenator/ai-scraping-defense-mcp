@@ -1,5 +1,5 @@
-use ai_scraping_defense_mcp::{config, mcp, state, telemetry};
 use anyhow::Result;
+use request_guard_mcp::{config, mcp, state, telemetry};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -16,7 +16,7 @@ async fn main() -> Result<()> {
         version = env!("CARGO_PKG_VERSION"),
         host = %config.host,
         port = config.port,
-        "ai-scraping-defense-mcp starting"
+        "request-guard-mcp starting"
     );
 
     // Build application state

@@ -2,14 +2,14 @@
 
 ## MCP Client Configuration
 
-Both client repositories connect to this MCP server using the following environment variables:
+Any MCP-capable client can connect to this server over WebSocket JSON-RPC. Clients that use `MODEL_URI` routing can use the following environment variables:
 
 ### `rhamenator/ai-scraping-defense` (Python/Django)
 
 ```dotenv
 MODEL_URI=mcp://primary/classify
 MCP_SERVER_PRIMARY_TRANSPORT=ws
-MCP_SERVER_PRIMARY_URL=ws://ai-scraping-defense-mcp:8085/mcp
+MCP_SERVER_PRIMARY_URL=ws://request-guard-mcp:8085/mcp
 MCP_SERVER_PRIMARY_AUTH_TOKEN=replace_me
 MCP_SERVER_PRIMARY_TIMEOUT=10
 ```
@@ -19,12 +19,24 @@ MCP_SERVER_PRIMARY_TIMEOUT=10
 ```dotenv
 MODEL_URI=mcp://primary/classify
 MCP_SERVER_PRIMARY_TRANSPORT=ws
-MCP_SERVER_PRIMARY_URL=ws://ai-scraping-defense-mcp:8085/mcp
+MCP_SERVER_PRIMARY_URL=ws://request-guard-mcp:8085/mcp
+MCP_SERVER_PRIMARY_AUTH_TOKEN=replace_me
+MCP_SERVER_PRIMARY_TIMEOUT=10
+```
+
+### `rhamenator/ai-scraping-defense-rust` (Rust services)
+
+```dotenv
+MODEL_URI=mcp://primary/classify
+MCP_SERVER_PRIMARY_TRANSPORT=ws
+MCP_SERVER_PRIMARY_URL=ws://request-guard-mcp:8085/mcp
 MCP_SERVER_PRIMARY_AUTH_TOKEN=replace_me
 MCP_SERVER_PRIMARY_TIMEOUT=10
 ```
 
 > For TLS-terminated deployments replace `ws://` with `wss://` and the appropriate hostname.
+
+The old `ai-scraping-defense-mcp` hostname is retained as a Docker/Kubernetes compatibility alias in the provided manifests.
 
 ## Fallback Strategy
 
@@ -34,6 +46,7 @@ If the MCP server is unavailable, clients should fall back to their local non-MC
 |--------|---------|
 | `ai-scraping-defense` | Built-in Python rule engine (`defense/classifier.py`) |
 | `ai-scraping-defense-iis` | Built-in .NET rule engine (`AiDefense.Classifier`) |
+| `ai-scraping-defense-rust` | Local Rust provider/router behavior |
 
 Fallback is triggered when:
 - WebSocket connection fails after 3 retries with exponential backoff
@@ -66,3 +79,4 @@ Fallback is triggered when:
 |--------|---------|--------|
 | `ai-scraping-defense` | main | ✅ Compatible |
 | `ai-scraping-defense-iis` | main | ✅ Compatible |
+| `ai-scraping-defense-rust` | main | ✅ Compatible |

@@ -1,21 +1,21 @@
 [package]
-name = "ai-scraping-defense-mcp"
+name = "request-guard-mcp"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
-description = "Production-ready Rust MCP server for AI scraping defense"
+description = "Production-ready Rust MCP server for request risk classification and enrichment"
 authors = ["rhamenator"]
 license = "MIT"
-repository = "https://github.com/rhamenator/ai-scraping-defense-mcp"
-keywords = ["mcp", "ai-defense", "scraping", "websocket", "security"]
+repository = "https://github.com/rhamenator/request-guard-mcp"
+keywords = ["mcp", "request-risk", "bot-detection", "websocket", "security"]
 categories = ["network-programming", "web-programming::websocket"]
 
 [[bin]]
-name = "ai-scraping-defense-mcp"
+name = "request-guard-mcp"
 path = "src/main.rs"
 
 [lib]
-name = "ai_scraping_defense_mcp"
+name = "request_guard_mcp"
 path = "src/lib.rs"
 
 [features]

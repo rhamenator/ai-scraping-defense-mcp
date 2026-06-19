@@ -1,5 +1,5 @@
 /// Smoke load test – classifies 500 requests concurrently and checks all succeed.
-use ai_scraping_defense_mcp::*;
+use request_guard_mcp::*;
 use std::sync::Arc;
 use tokio::task::JoinSet;
 

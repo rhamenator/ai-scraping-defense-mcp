@@ -2,17 +2,17 @@
 
 ## Overview
 
-`ai-scraping-defense-mcp` is a production-ready **Model Context Protocol (MCP) server** implemented in Rust. It provides a unified, high-performance classification and enrichment API consumed by both `ai-scraping-defense` (Python/Django) and `ai-scraping-defense-iis` (.NET) via WebSocket transport.
+`request-guard-mcp` is a production-ready **Model Context Protocol (MCP) server** implemented in Rust. It provides a unified, high-performance request classification and enrichment API for any client that can speak WebSocket JSON-RPC. The `ai-scraping-defense` Python, IIS, and Rust projects are compatible clients, but they are not required dependencies.
 
 ```
 ┌──────────────────────────┐   WebSocket/MCP   ┌────────────────────────────────┐
-│  ai-scraping-defense     │ ─────────────────► │  ai-scraping-defense-mcp       │
-│  (Python / Django)       │                   │  (Rust / Tokio / Axum)         │
+│  Any MCP-capable client   │ ─────────────────► │  request-guard-mcp            │
+│  or model adapter         │                   │  (Rust / Tokio / Axum)         │
 └──────────────────────────┘                   │                                │
                                                │  ┌─────────────┐               │
 ┌──────────────────────────┐   WebSocket/MCP   │  │ Tool Registry│               │
-│  ai-scraping-defense-iis │ ─────────────────► │  └──────┬──────┘               │
-│  (.NET / IIS)            │                   │         │                      │
+│  Legacy ASD clients      │ ─────────────────► │  └──────┬──────┘               │
+│  (Python / IIS / Rust)   │                   │         │                      │
 └──────────────────────────┘                   │  ┌──────▼──────────────────┐   │
                                                │  │  Engines                │   │
                                                │  │  ├── RuleEngine         │   │

@@ -45,7 +45,7 @@ To tune thread count:
 
 Or via environment:
 ```bash
-TOKIO_WORKER_THREADS=8 ./ai-scraping-defense-mcp
+TOKIO_WORKER_THREADS=8 ./request-guard-mcp
 ```
 
 ## Metrics

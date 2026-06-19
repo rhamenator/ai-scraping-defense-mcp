@@ -40,13 +40,13 @@ run-release:
 
 # ─── Docker ──────────────────────────────────────────────────────────────────
 docker-build:
-	docker build -t ai-scraping-defense-mcp:local -f docker/Dockerfile .
+	docker build -t request-guard-mcp:local -f docker/Dockerfile .
 
 docker-run: docker-build
 	docker run --rm -p 8085:8085 \
 		-e AUTH_TOKENS=dev-token \
 		-e LOG_LEVEL=debug \
-		ai-scraping-defense-mcp:local
+		request-guard-mcp:local
 
 docker-compose-up:
 	docker compose -f docker/docker-compose.yml up -d

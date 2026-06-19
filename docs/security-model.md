@@ -13,7 +13,7 @@ All WebSocket connections are authenticated at connection establishment using to
 
 - In production, place the server behind a TLS-terminating reverse proxy (nginx, Envoy, or a cloud load balancer).
 - The server itself speaks plain WebSocket (`ws://`) internally.
-- Kubernetes NetworkPolicy restricts ingress to the `ai-defense` namespace only.
+- Kubernetes NetworkPolicy restricts ingress to the `request-guard`, `ai-defense`, and `default` namespaces by default. Tighten this allowlist for your deployment.
 
 ## Input Validation
 

@@ -177,7 +177,7 @@ mod defaults {
         "/metrics".to_string()
     }
     pub fn service_name() -> String {
-        "ai-scraping-defense-mcp".to_string()
+        "request-guard-mcp".to_string()
     }
     pub fn redis_pool_size() -> usize {
         16

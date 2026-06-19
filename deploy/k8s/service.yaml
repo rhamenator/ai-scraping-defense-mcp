@@ -1,14 +1,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ai-scraping-defense-mcp
-  namespace: ai-defense
+  name: request-guard-mcp
+  namespace: request-guard
   labels:
-    app: ai-scraping-defense-mcp
+    app: request-guard-mcp
 spec:
   type: ClusterIP
   selector:
-    app: ai-scraping-defense-mcp
+    app: request-guard-mcp
+  ports:
+    - name: http
+      port: 8085
+      targetPort: 8085
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-scraping-defense-mcp
+  namespace: request-guard
+  labels:
+    app: request-guard-mcp
+    compatibility.request-guard.dev/legacy-name: "true"
+spec:
+  type: ClusterIP
+  selector:
+    app: request-guard-mcp
   ports:
     - name: http
       port: 8085

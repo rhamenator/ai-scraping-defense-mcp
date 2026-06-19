@@ -38,8 +38,8 @@ RUN groupadd -r mcp && useradd -r -g mcp -d /app -s /sbin/nologin mcp
 WORKDIR /app
 
 # Copy binary
-COPY --from=builder /build/target/release/ai-scraping-defense-mcp /usr/local/bin/ai-scraping-defense-mcp
-RUN chmod +x /usr/local/bin/ai-scraping-defense-mcp
+COPY --from=builder /build/target/release/request-guard-mcp /usr/local/bin/request-guard-mcp
+RUN chmod +x /usr/local/bin/request-guard-mcp
 
 # Switch to non-root user
 USER mcp
@@ -49,4 +49,4 @@ EXPOSE 8085
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -fsS http://localhost:8085/health || exit 1
 
-ENTRYPOINT ["/usr/local/bin/ai-scraping-defense-mcp"]
+ENTRYPOINT ["/usr/local/bin/request-guard-mcp"]

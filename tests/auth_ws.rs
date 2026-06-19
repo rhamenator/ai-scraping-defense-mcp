@@ -1,6 +1,6 @@
-/// Auth tests for WebSocket access control.
-use ai_scraping_defense_mcp::auth;
 use axum::http::{HeaderMap, HeaderValue};
+/// Auth tests for WebSocket access control.
+use request_guard_mcp::auth;
 
 /// Build an Authorization header value at runtime to avoid scanner redaction.
 fn auth_hdr(tok: &str) -> String {
@@ -26,7 +26,7 @@ fn wrong_token_rejected_with_forbidden() {
     let result = auth::verify_token(&headers_with(&auth_hdr("bad-token")), &tokens);
     assert!(matches!(
         result,
-        Err(ai_scraping_defense_mcp::error::AppError::Forbidden)
+        Err(request_guard_mcp::error::AppError::Forbidden)
     ));
 }
 
@@ -36,7 +36,7 @@ fn missing_header_returns_unauthenticated() {
     let result = auth::verify_token(&HeaderMap::new(), &tokens);
     assert!(matches!(
         result,
-        Err(ai_scraping_defense_mcp::error::AppError::Unauthenticated)
+        Err(request_guard_mcp::error::AppError::Unauthenticated)
     ));
 }
 
@@ -54,7 +54,7 @@ fn empty_token_list_rejects_all() {
     let result = auth::verify_token(&headers_with(&auth_hdr("any-token")), &tokens);
     assert!(matches!(
         result,
-        Err(ai_scraping_defense_mcp::error::AppError::Forbidden)
+        Err(request_guard_mcp::error::AppError::Forbidden)
     ));
 }
 

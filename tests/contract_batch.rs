@@ -1,5 +1,5 @@
 /// Contract tests for the batch_classify tool.
-use ai_scraping_defense_mcp::*;
+use request_guard_mcp::*;
 
 fn make_state() -> state::AppState {
     state::AppState::new(config::Config::default())

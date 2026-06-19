@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ai-scraping-defense-mcp
-  namespace: ai-defense
+  name: request-guard-mcp
+  namespace: request-guard
   labels:
-    app: ai-scraping-defense-mcp
+    app: request-guard-mcp
     version: "0.1.0"
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ai-scraping-defense-mcp
+      app: request-guard-mcp
   template:
     metadata:
       labels:
-        app: ai-scraping-defense-mcp
+        app: request-guard-mcp
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "8085"
@@ -26,7 +26,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: mcp
-          image: ghcr.io/rhamenator/ai-scraping-defense-mcp:latest
+          image: ghcr.io/rhamenator/request-guard-mcp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8085

@@ -16,7 +16,7 @@ docker run --rm \
   -p 8085:8085 \
   -e AUTH_TOKENS=your_strong_token \
   -e LOG_LEVEL=info \
-  ghcr.io/rhamenator/ai-scraping-defense-mcp:latest
+  ghcr.io/rhamenator/request-guard-mcp:latest
 ```
 
 ### Docker Compose (with Redis + PostgreSQL)
@@ -29,7 +29,7 @@ AUTH_TOKENS=your_token docker compose up -d
 ```bash
 # Create secrets
 kubectl create secret generic mcp-secrets \
-  --namespace ai-defense \
+  --namespace request-guard \
   --from-literal=auth_tokens=your_strong_token
 
 # Apply manifests
@@ -70,25 +70,25 @@ wscat -H "Authorization: $(echo -n 'Bearer ')$YOUR_TOKEN" -c ws://localhost:8085
 ### View logs
 ```bash
 # Docker
-docker logs ai-scraping-defense-mcp -f
+docker logs request-guard-mcp -f
 
 # Kubernetes
-kubectl logs -n ai-defense -l app=ai-scraping-defense-mcp -f
+kubectl logs -n request-guard -l app=request-guard-mcp -f
 ```
 
 ### Scale up
 ```bash
-kubectl scale deployment ai-scraping-defense-mcp -n ai-defense --replicas=5
+kubectl scale deployment request-guard-mcp -n request-guard --replicas=5
 ```
 
 ### Rolling restart
 ```bash
-kubectl rollout restart deployment/ai-scraping-defense-mcp -n ai-defense
+kubectl rollout restart deployment/request-guard-mcp -n request-guard
 ```
 
 ### Check HPA status
 ```bash
-kubectl get hpa -n ai-defense
+kubectl get hpa -n request-guard
 ```
 
 ## Troubleshooting
@@ -105,5 +105,5 @@ kubectl get hpa -n ai-defense
 
 1. Update the image tag in `deployment.yaml`.
 2. Apply: `kubectl apply -f deploy/k8s/deployment.yaml`.
-3. Monitor: `kubectl rollout status deployment/ai-scraping-defense-mcp -n ai-defense`.
-4. Rollback if needed: `kubectl rollout undo deployment/ai-scraping-defense-mcp -n ai-defense`.
+3. Monitor: `kubectl rollout status deployment/request-guard-mcp -n request-guard`.
+4. Rollback if needed: `kubectl rollout undo deployment/request-guard-mcp -n request-guard`.
