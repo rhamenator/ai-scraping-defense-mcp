@@ -1,6 +1,7 @@
 name: Container Build & Push
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
     tags: ["v*.*.*"]
@@ -9,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: rhamenator/request-guard-mcp
 
 jobs:
   build-and-push:
